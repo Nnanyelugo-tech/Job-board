@@ -33,13 +33,16 @@ export function JobCard({ job, index, onApply }: JobCardProps) {
             <h3 className="font-semibold text-lg text-gray-900 group-hover:text-emerald-600 transition-colors">
               {job.title}
             </h3>
-            
+
             <p className="mt-1 text-sm text-gray-500 line-clamp-2">
               {job.description}
             </p>
           </div>
           <span
-            className={`shrink-0 px-2 py-1 rounded-md text-xs font-medium border ${departmentColors[job.department] || "bg-gray-100 text-gray-700 border-gray-200"}`}
+            className={`shrink-0 px-2 py-1 rounded-md text-xs font-medium border ${
+              departmentColors[job.department] ||
+              "bg-gray-100 text-gray-700 border-gray-200"
+            }`}
           >
             {job.department}
           </span>

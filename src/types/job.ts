@@ -23,5 +23,3 @@ export interface Job {
   description: string;
   requirements: string[];
 }
-
-
