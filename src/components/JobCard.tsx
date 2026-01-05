@@ -1,5 +1,6 @@
 import { Briefcase, Clock, GraduationCap, ChevronRight } from "lucide-react";
 import type { Job } from "../types/job";
+import { departmentColors } from "../utils/badgeStyles";
 
 interface JobCardProps {
   job: Job;
@@ -7,39 +8,28 @@ interface JobCardProps {
   onApply: (job: Job) => void;
 }
 
-const departmentColors: Record<string, string> = {
-  Management: "bg-emerald-100 text-emerald-700 border-emerald-200",
-  Finance: "bg-emerald-200 text-emerald-800 border-emerald-300",
-  "Human Resources": "bg-violet-100 text-violet-700 border-violet-200",
-  Marketing: "bg-orange-100 text-orange-700 border-orange-200",
-  Operations: "bg-sky-100 text-sky-700 border-sky-200",
-  Engineering: "bg-rose-100 text-rose-700 border-rose-200",
-  Support: "bg-amber-100 text-amber-700 border-amber-200",
-};
-
 export function JobCard({ job, index, onApply }: JobCardProps) {
   return (
     <div
-      className="group bg-white rounded-xl p-6 gap-7
-  shadow-[0_8px_24px_rgba(0,0,0,0.12)]
-  hover:shadow-[0_16px_32px_rgba(0,0,0,0.18)]
-  transition-all duration-300"
+      className="group bg-white rounded-xl p-4 sm:p-6 gap-4 sm:gap-6
+        shadow-[0_8px_24px_rgba(0,0,0,0.12)]
+        hover:shadow-[0_16px_32px_rgba(0,0,0,0.18)]
+        transition-all duration-300"
       style={{ animationDelay: `${index * 50}ms` }}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3 sm:gap-4">
         {/* Title & Department */}
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
           <div className="flex-1">
-            <h3 className="font-semibold text-lg text-gray-900 group-hover:text-emerald-600 transition-colors">
+            <h3 className="font-semibold text-lg sm:text-lg text-gray-900 group-hover:text-emerald-600 transition-colors">
               {job.title}
             </h3>
-
-            <p className="mt-1 text-sm text-gray-500 line-clamp-2">
+            <p className="mt-1 text-sm sm:text-sm text-gray-500 line-clamp-3">
               {job.description}
             </p>
           </div>
           <span
-            className={`shrink-0 px-2 py-1 rounded-md text-xs font-medium border ${
+            className={`shrink-0 mt-2 sm:mt-0 px-2 py-1 rounded-md text-xs sm:text-xs font-medium border ${
               departmentColors[job.department] ||
               "bg-gray-100 text-gray-700 border-gray-200"
             }`}
@@ -49,7 +39,7 @@ export function JobCard({ job, index, onApply }: JobCardProps) {
         </div>
 
         {/* Job Details */}
-        <div className="flex flex-wrap gap-3 text-sm text-gray-600">
+        <div className="flex flex-wrap gap-2 text-sm text-gray-600">
           <div className="flex items-center gap-1.5">
             <GraduationCap className="h-4 w-4 text-emerald-600" />
             <span>{job.qualification}</span>
