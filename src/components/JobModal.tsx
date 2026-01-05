@@ -1,7 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { Job } from "../types/job";
+import { departmentColors } from "../utils/badgeStyles";
+import JobApplicationForm from "./JobApplicationForm";
 
-import { X, Briefcase, Clock, GraduationCap, CheckCircle2, Mail, MapPin, Calendar } from "lucide-react";
+
+import {
+  X,
+  Briefcase,
+  Clock,
+  GraduationCap,
+  CheckCircle2,
+  Mail,
+  MapPin,
+  Calendar,
+  FileText,
+  Send,
+} from "lucide-react";
+import type { ApplicationFormData } from "../schemas/validation";
+import { qualifications } from "../data/jobs";
 
 interface JobModalProps {
   job: Job;
@@ -9,6 +25,9 @@ interface JobModalProps {
 }
 
 export default function JobModal({ job, onClose }: JobModalProps) {
+  const [activeTab, setActiveTab] = useState<"details" | "apply">("details");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Lock background scroll when modal is open
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -17,13 +36,24 @@ export default function JobModal({ job, onClose }: JobModalProps) {
     };
   }, []);
 
+  // Handle form submission
+  const handleFormSubmit = (data: ApplicationFormData, file: File | null) => {
+    setIsSubmitting(true);
+    console.log("Form Data:", data);
+    console.log("CV File:", file);
+
+    setTimeout(() => {
+      alert("Application submitted!");
+      setIsSubmitting(false);
+      setActiveTab("details");
+      onClose();
+    }, 1000);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Overlay */}
-      <div
-        className="absolute inset-0 bg-black/70"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/70" onClick={onClose} />
 
       {/* Modal */}
       <div
@@ -40,108 +70,177 @@ export default function JobModal({ job, onClose }: JobModalProps) {
 
         {/* Header */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
-            {job.title}
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900">{job.title}</h2>
 
-
-          
-          <p className="mt-2 text-gray-600 leading-relaxed">
-            {job.description}
-          </p>
-        </div>
-
-        {/* Job Meta */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-emerald-100">
-              <GraduationCap className="h-4 w-4 text-emerald-600" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500">Qualification</p>
-              <p className="font-medium text-gray-900">{job.qualification}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-amber-100">
-              <Clock className="h-4 w-4 text-amber-600" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500">Experience</p>
-              <p className="font-medium text-gray-900">{job.experience}</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-sky-100">
-              <Briefcase className="h-4 w-4 text-sky-600" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500">Department</p>
-              <p className="font-medium text-gray-900">{job.department}</p>
-            </div>
+          <div className="flex flex-wrap gap-2 mt-3">
+            <span
+              className={`px-3 py-1 rounded-md text-sm font-medium border
+           ${
+             departmentColors[job.department] ??
+             "bg-gray-100 text-gray-700 border-gray-200"
+           }`}
+            >
+              {job.department}
+            </span>
+            <span className="px-3 py-1 rounded-full bg-gray-100 text-sm font-medium">
+              {job.qualification}
+            </span>
           </div>
         </div>
 
-        {/* Job Description */}
+        {/* Tabs Navigation */}
         <div className="mb-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-2">
-            Job Description
-          </h4>
-          <p className="text-gray-600 leading-relaxed">
-            {job.description}
-          </p>
+          <div className="grid grid-cols-2 rounded-xl bg-gray-100 p-1">
+            <button
+              onClick={() => setActiveTab("details")}
+              className={`flex items-center justify-center gap-2 rounded-lg py-3 text-sm font-semibold transition
+        ${
+          activeTab === "details"
+            ? "bg-white text-emerald-600 shadow"
+            : "text-gray-500 hover:text-gray-700"
+        }`}
+            >
+              <FileText className="h-4 w-4" />
+              Job Details
+            </button>
+
+            <button
+              onClick={() => setActiveTab("apply")}
+              className={`flex items-center justify-center gap-2 rounded-lg py-3 text-sm font-semibold transition
+        ${
+          activeTab === "apply"
+            ? "bg-white text-emerald-600 shadow"
+            : "text-gray-500 hover:text-gray-700"
+        }`}
+            >
+              <Send className="h-4 w-4" />
+              Apply Now
+            </button>
+          </div>
         </div>
 
-        {/* Requirements */}
-        <div className="mb-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-3">
-            Requirements
-          </h4>
-          <ul className="space-y-2">
-            {job.requirements.map((req, index) => (
-              <li
-                key={index}
-                className="flex items-start gap-2 text-gray-600"
+        {/* Render Job Details */}
+        {activeTab === "details" && (
+          <>
+            {/* Job Meta */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-emerald-100">
+                  <GraduationCap className="h-4 w-4 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Qualification</p>
+                  <p className="font-medium text-gray-900">
+                    {job.qualification}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-amber-100">
+                  <Clock className="h-4 w-4 text-amber-600" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Experience</p>
+                  <p className="font-medium text-gray-900">{job.experience}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-sky-100">
+                  <Briefcase className="h-4 w-4 text-sky-600" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500">Department</p>
+                  <p className="font-medium text-gray-900">{job.department}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Job Description */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                Job Description
+              </h4>
+              <p className="text-gray-600 leading-relaxed">{job.description}</p>
+            </div>
+
+            {/* Requirements */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                Requirements
+              </h4>
+              <ul className="space-y-2">
+                {job.requirements.map((req, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-2 text-gray-600"
+                  >
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5" />
+                    <span>{req}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Application Info */}
+            <div className="rounded-xl bg-gray-50 p-4 space-y-3">
+              <h4 className="font-semibold text-gray-900">
+                Application Information
+              </h4>
+
+              <p className="text-sm text-gray-600 flex items-center gap-1">
+                <Mail className="h-4 w-4 text-blue-600" />
+                Email your CV to <strong>hirecore@gas.ng</strong>
+              </p>
+              <p className="text-sm text-gray-600 flex items-center gap-1">
+                <MapPin className="h-4 w-4 text-green-600" />
+                HireCore Recruitment, Emene, Enugu
+              </p>
+              <p className="text-sm text-gray-600 flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
+                Deadline:{" "}
+                <strong className="text-red-600">May 12th, 2025</strong>
+              </p>
+            </div>
+
+            {/* Apply button */}
+            <div className="flex items-center gap-3 pt-4">
+              <button
+                onClick={() => setActiveTab("apply")}
+                className="flex-1 inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg transition-colors"
               >
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5" />
+                <Send className="h-4 w-4" />
+                Apply Online
+              </button>
 
-                <span>{req}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+              <button
+                onClick={onClose}
+                className="shrink-0 px-5 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </>
+        )}
 
-        {/* Application Info */}
-        <div className="rounded-xl bg-gray-50 p-4 space-y-3">
-          <h4 className="font-semibold text-gray-900">
-            Application Information
-          </h4>
+        {/* Render Apply Form */}
+        {activeTab === "apply" && (
+          <div>
+            <div className="mb-4 p-3 rounded-lg bg-emerald-50 border border-emerald-100">
+              <p className="text-sm">
+                Applying for: <strong>{job.title}</strong>
+              </p>
+            </div>
 
-          <p className="text-sm text-gray-600">
-            <Mail className="h-4 w-4 text-blue-600 inline mr-1" />
-            Email your CV to{" "}
-            <strong className="text-gray-900">
-              hirecore@gas.ng
-            </strong>
-          </p>
-          <p className="text-sm text-gray-600">
-            <MapPin className="h-4 w-4 text-green-600 inline mr-1" />
-            HireCore Recruitment, Emene, Enugu
-          </p>
-          <p className="text-sm text-gray-600">
-            <Calendar className="h-4 w-4  inline mr-1" />
-            Deadline:{" "}
-            <strong className="text-red-600">
-              May 12th, 2025
-            </strong>
-          </p>
-        </div>
+            <JobApplicationForm
+              qualifications={qualifications}
+              onSubmitForm={handleFormSubmit}
+              isSubmitting={isSubmitting}
+            />
+          </div>
+        )}
       </div>
-      
     </div>
-
-    
   );
 }

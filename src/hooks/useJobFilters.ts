@@ -34,12 +34,10 @@ export function useJobFilters({ jobs }: UseJobFiltersArgs) {
   return {
     // filtered data
     filteredJobs,
-
     // state values
     search,
     selectedDepartment,
     selectedQualification,
-
     // setters
     setSearch,
     setSelectedDepartment,
