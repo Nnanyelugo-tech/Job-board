@@ -35,7 +35,6 @@ export default function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
-        <Route path="/admin" element={<Admin />} />
       </Route>
     </Routes>
   );
