@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
-import { CheckCircle2 } from "lucide-react";
+import { Building2, CheckCircle2, Flame, Users } from "lucide-react";
 
-export default function Home() {
+interface HomeProps {
+  totalJobs: number;
+}
+
+export default function Home({ totalJobs }: HomeProps) {
   return (
     <>
       {/* HERO / LANDING SECTION */}
@@ -29,7 +33,10 @@ export default function Home() {
 
             {/* Subtext */}
             <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-10 max-w-xl sm:max-w-3xl mx-auto">
-              HireCore Company Limited is a medical and industrial gas production company located in Emene, Enugu State. Recently reengineered and rehabilitated by the Enugu State Government, we are expanding our workforce and welcoming qualified professionals.
+              HireCore Company Limited is a medical and industrial gas
+              production company located in Emene, Enugu State. Recently
+              reengineered and rehabilitated by the Enugu State Government, we
+              are expanding our workforce and welcoming qualified professionals.
             </p>
 
             {/* Primary CTA */}
@@ -51,19 +58,32 @@ export default function Home() {
 
             {/* Stats Bar */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-10 sm:mt-16 max-w-2xl mx-auto">
-              <div className="p-4 sm:p-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Enugu</p>
+              <div className="p-4 sm:p-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-center text-center gap-2">
+                <Users className="h-6 w-6 text-emerald-400" />
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                  Enugu
+                </p>
                 <p className="text-sm sm:text-base text-white/70">Location</p>
               </div>
 
-              <div className="p-4 sm:p-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">7+</p>
-                <p className="text-sm sm:text-base text-white/70">Departments</p>
+              <div className="p-4 sm:p-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-center text-center gap-2">
+                <Building2 className="h-6 w-6 text-emerald-400" />
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                  7+
+                </p>
+                <p className="text-sm sm:text-base text-white/70">
+                  Departments
+                </p>
               </div>
 
-              <div className="p-4 sm:p-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
-                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Growing</p>
-                <p className="text-sm sm:text-base text-white/70">Opportunities</p>
+              <div className="p-4 sm:p-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-center text-center gap-2">
+                <Flame className="h-6 w-6 text-emerald-400" />
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                  {totalJobs}
+                </p>
+                <p className="text-sm sm:text-base text-white/70">
+                  Open Positions
+                </p>
               </div>
             </div>
           </div>
@@ -88,9 +108,12 @@ export default function Home() {
               <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl sm:text-2xl font-bold group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                 01
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-900">Explore Opportunities</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-900">
+                Explore Opportunities
+              </h3>
               <p className="text-gray-600 text-sm sm:text-base">
-                Browse available roles based on your skills, experience, and department of interest.
+                Browse available roles based on your skills, experience, and
+                department of interest.
               </p>
             </div>
 
@@ -99,9 +122,12 @@ export default function Home() {
               <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl sm:text-2xl font-bold group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                 02
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-900">Submit Application</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-900">
+                Submit Application
+              </h3>
               <p className="text-gray-600 text-sm sm:text-base">
-                Apply online by submitting your CV and application letter through our official recruitment channel.
+                Apply online by submitting your CV and application letter
+                through our official recruitment channel.
               </p>
             </div>
 
@@ -110,9 +136,12 @@ export default function Home() {
               <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl sm:text-2xl font-bold group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                 03
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-900">Review & Selection</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-900">
+                Review & Selection
+              </h3>
               <p className="text-gray-600 text-sm sm:text-base">
-                Shortlisted candidates will be contacted for assessment and further evaluation.
+                Shortlisted candidates will be contacted for assessment and
+                further evaluation.
               </p>
             </div>
           </div>
@@ -125,14 +154,14 @@ export default function Home() {
           <div className="max-w-xl sm:max-w-3xl md:max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 text-center border border-gray-100">
             <div className="inline-block p-3 sm:p-4 rounded-full bg-emerald-100 mb-4 sm:mb-6">
               <CheckCircle2 className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600" />
-               
             </div>
 
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-slate-900">
               Ready to Take the Next Step?
             </h3>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-md sm:max-w-2xl mx-auto">
-              Join a growing organization committed to excellence, safety, and sustainable industrial development.
+              Join a growing organization committed to excellence, safety, and
+              sustainable industrial development.
             </p>
 
             <Link
@@ -143,9 +172,11 @@ export default function Home() {
             </Link>
 
             <div className="mt-6 sm:mt-8 pt-4 sm:pt-8 border-t border-gray-200">
-              <p className="text-sm text-gray-500 mb-1 sm:mb-2">Application Deadline</p>
+              <p className="text-sm text-gray-500 mb-1 sm:mb-2">
+                Application Deadline
+              </p>
               <p className="text-base sm:text-lg font-semibold text-slate-900">
-                May 12, 2025 at 12:00 midnight
+                May 12, 2026 at 12:00 midnight
               </p>
             </div>
           </div>
