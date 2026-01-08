@@ -94,7 +94,7 @@ export default function Jobs() {
             All applications must be submitted before
             <span className="font-semibold text-gray-900">
               {" "}
-              12:00 Midnight on May 12th, 2025
+              12:00 Midnight on May 12th, 2026
             </span>
             .
           </p>
