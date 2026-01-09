@@ -4,12 +4,16 @@ import { jobs } from "./data/jobs";
 import Home from "./pages/Home";
 import Jobs from "./pages/JobsPage";
 
+import AdminDashboard from "./pages/AdminDashboard";
+
 export default function App() {
   return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home totalJobs={jobs.length} />} />
         <Route path="/jobs" element={<Jobs />} />
+
+        <Route path="/admin" element={<AdminDashboard />} />
       </Route>
     </Routes>
   );

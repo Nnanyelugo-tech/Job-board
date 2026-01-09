@@ -1,0 +1,40 @@
+import type { Application } from "../types/application";
+
+export const mockApplications: Application[] = [
+  {
+    id: "1",
+    job_title: "Production Manager",
+    name: "John Doe",
+    email: "john.doe@email.com",
+    phone: "08012345678",
+    qualification: "B.Sc Chemical Engineering",
+    experience: "5 years",
+    cv_url: null,
+    status: "pending",
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "2",
+    job_title: "Accountant",
+    name: "Jane Smith",
+    email: "jane.smith@email.com",
+    phone: "08098765432",
+    qualification: "B.Sc Accounting",
+    experience: "3 years",
+    cv_url: null,
+    status: "reviewed",
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "3",
+    job_title: "Security Officer",
+    name: "Mike Johnson",
+    email: "mike.johnson@email.com",
+    phone: "07055551234",
+    qualification: "SSCE",
+    experience: "8 years",
+    cv_url: null,
+    status: "accepted",
+    created_at: new Date().toISOString(),
+  },
+];
