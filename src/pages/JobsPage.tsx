@@ -5,6 +5,7 @@ import { JobCard } from "../components/JobCard";
 import JobModal from "../components/JobModal";
 import { JobFilters } from "../components/JobFilters";
 import { useJobFilters } from "../hooks/useJobFilters";
+import { Briefcase } from "lucide-react";
 
 export default function Jobs() {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
@@ -27,7 +28,8 @@ export default function Jobs() {
         </h1>
         <p className="text-gray-700 text-sm sm:text-base md:text-lg max-w-xl sm:max-w-2xl mx-auto">
           Explore exciting opportunities to join our team and grow your career.
-          We value talent, dedication, and passion. Browse our job openings below and find the role that fits you best.
+          We value talent, dedication, and passion. Browse our job openings
+          below and find the role that fits you best.
         </p>
       </section>
 
@@ -45,17 +47,69 @@ export default function Jobs() {
           setSelectedQualification={setSelectedQualification}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6">
-          {filteredJobs.map((job, index) => (
-            <JobCard
-              key={job.id}
-              index={index}
-              job={job}
-              onApply={setSelectedJob}
-            />
-          ))}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <Briefcase className="h-5 w-5 text-emerald-600" />
+            <h2 className="font-display text-xl font-semibold text-gray-900">
+              {filteredJobs.length}{" "}
+              {filteredJobs.length === 1 ? "Position" : "Positions"} Available
+            </h2>
+          </div>
         </div>
+
+        {filteredJobs.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6">
+            {filteredJobs.map((job, index) => (
+              <JobCard
+                key={job.id}
+                index={index}
+                job={job}
+                onApply={setSelectedJob}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+              <Briefcase className="h-8 w-8 text-emerald-600" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2 text-gray-900">
+              No Job Found
+            </h3>
+
+            <p className="text-sm text-gray-600">
+              Please try adjusting your filters or search terms.
+            </p>
+          </div>
+        )}
       </section>
+
+      {/* Application Deadline Notice */}
+      <div className="mt-12 rounded-2xl border border-red-500/20 bg-red-50 p-4 sm:p-2">
+        <div className="max-w-3xl mx-auto text-center space-y-2">
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+            <span className="font-semibold text-red-600">
+              Important Notice:
+            </span>{" "}
+            All applications must be submitted before
+            <span className="font-semibold text-gray-900">
+              {" "}
+              12:00 Midnight on May 12th, 2026
+            </span>
+            .
+          </p>
+
+          <p className="text-sm sm:text-base text-gray-700">
+            Send your CV to: {" "}
+            <a
+              href="mailto:hirecore@gas.ng"
+              className="font-medium text-emerald-600 hover:text-emerald-700 hover:underline transition"
+            >
+              hirecore@gas.ng
+            </a>
+          </p>
+        </div>
+      </div>
 
       {selectedJob && (
         <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
