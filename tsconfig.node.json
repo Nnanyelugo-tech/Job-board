@@ -4,6 +4,14 @@
     "target": "ES2023",
     "lib": ["ES2023"],
     "module": "ESNext",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {},
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
     "types": ["node"],
     "skipLibCheck": true,
 
@@ -22,5 +30,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "src"]
 }

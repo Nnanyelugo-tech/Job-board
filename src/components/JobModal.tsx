@@ -195,7 +195,7 @@ export default function JobModal({ job, onClose }: JobModalProps) {
               </p>
               <p className="text-sm text-gray-600 flex items-center gap-1">
                 <MapPin className="h-4 w-4 text-green-600" />
-                HireCore Recruitment, awkazone, Anambara State
+                HireCore Recruitment, Enugu, Enugu State
               </p>
               <p className="text-sm text-gray-600 flex items-center gap-1">
                 <Calendar className="h-4 w-4" />

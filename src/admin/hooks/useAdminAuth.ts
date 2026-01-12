@@ -4,11 +4,16 @@ export function useAdminAuth() {
   const navigate = useNavigate();
 
   const logout = () => {
-    sessionStorage.removeItem("adminAuthenticated");
-    navigate("/");
+    sessionStorage.removeItem("isAdminAuthenticated");
+    navigate("/admin/login");
   };
 
-  return {
+
+  const isAuthenticated = () => {
+    return sessionStorage.getItem("isAdminAuthenticated") === "true";
+  };
+    return {
     logout,
+    isAuthenticated,
   };
 }
