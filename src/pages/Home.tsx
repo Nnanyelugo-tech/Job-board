@@ -34,8 +34,8 @@ export default function Home({ totalJobs }: HomeProps) {
             {/* Subtext */}
             <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-10 max-w-xl sm:max-w-3xl mx-auto">
               HireCore Company Limited is a medical and industrial gas
-              production company located in Emene, Enugu State. Recently
-              reengineered and rehabilitated by the Enugu State Government, we
+              production company located in Enugu, Enugu State. Recently
+              re-engineered and rehabilitated by the Enugu State Government, we
               are expanding our workforce and welcoming qualified professionals.
             </p>
 

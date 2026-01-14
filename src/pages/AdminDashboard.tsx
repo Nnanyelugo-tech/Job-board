@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   const { logout } = useAdminAuth();
   const { applications, updateStatus, removeApplication } = useApplications();
 
-  // Tailwind classes for status badges
+ 
   const statusColors: Record<ApplicationStatus, string> = {
     pending: "bg-yellow-100 text-yellow-800",
     reviewed: "bg-blue-100 text-blue-800",
